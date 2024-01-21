@@ -1,40 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Customer Ticket API
 
-## Getting Started
+## Overview
 
-First, run the development server:
+The "Customer Ticket API" allows you to obtain a ticket ID by executing a script. This can be useful in scenarios where dynamic ticket creation is required, and a specific script generates the ticket ID.
+
+## Endpoint
+
+- **Endpoint URL:** `/api/ticket`
+- **HTTP Method:** `GET`
+
+## Request
+
+No specific request parameters are required for this API. A simple HTTP GET request to the endpoint triggers the execution of the script.
+
+**Example Request:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+curl -X GET https://your-api-domain/api/ticket
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Response
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+The API response provides a JSON object containing the generated ticket ID or an error message in case of failure.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+**Success Response:**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```json
+{
+  "ticket": "unique_ticket_id"
+}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **`ticket` (string):** The generated ticket ID.
 
-## Learn More
+**Error Response:**
 
-To learn more about Next.js, take a look at the following resources:
+```json
+{
+  "error": "Error generating ticket",
+  "ticket": ""
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`error` (string):** A descriptive error message indicating the reason for the failure.
+- **`ticket` (string):** An empty string as a placeholder for the ticket ID when an error occurs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Error Handling
 
-## Deploy on Vercel
+In case of an error during script execution, the API responds with an HTTP status code of 500 and includes an error message in the response body.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Implementation Details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Language: C
+- UUID Generation: The API utilizes C script to generate UUID-based ticket IDs.
+
+## Notes
+
+- Handle errors gracefully by checking the presence of the 'error' property in the API response.
+- The generated ticket ID is provided in the 'ticket' property of the successful response.
