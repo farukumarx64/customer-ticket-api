@@ -17,7 +17,7 @@ export default async function handler(
     console.log(scriptPath)
 
     const { stdout } = await new Promise<{ stdout: string }>((resolve, reject) => {
-      execFile('./generate-ticket/generate-ticket', (err, stdout, stderr) => {
+      execFile('./generate-ticket/output/generate-ticket', (err, stdout, stderr) => {
         if (err) {
           console.error(`Error executing child process: ${err}`);
           console.error(`Child process stderr: ${stderr}`);
