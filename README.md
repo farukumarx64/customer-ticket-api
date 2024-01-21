@@ -16,7 +16,7 @@ No specific request parameters are required for this API. A simple HTTP GET requ
 **Example Request:**
 
 ```bash
-curl -X GET https://your-api-domain/api/ticket
+curl -X GET https://customer-ticket-pink.vercel.app/api/ticket
 ```
 
 ## Response
