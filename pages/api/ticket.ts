@@ -13,11 +13,10 @@ export default async function handler(
 ) {
   try {
     const projectRoot = process.cwd();
-    const scriptPath = join(__dirname, 'generate-ticket', 'generate-ticket');
-    console.log(scriptPath)
+    const scriptPath = join(projectRoot, 'pages', 'api', 'generate-ticket', 'generate-ticket');
 
     const { stdout } = await new Promise<{ stdout: string }>((resolve, reject) => {
-      execFile('./generate-ticket/output/generate-ticket', (err, stdout, stderr) => {
+      execFile(scriptPath, (err, stdout, stderr) => {
         if (err) {
           console.error(`Error executing child process: ${err}`);
           console.error(`Child process stderr: ${stderr}`);
